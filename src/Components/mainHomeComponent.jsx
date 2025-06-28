@@ -11,7 +11,7 @@ import { FaBars,
           FaEnvelope,
            FaMapMarkerAlt } from 'react-icons/fa';
            
-import logo from '../assets/logo.png';
+import logo from '.../public/logo.png';
 import styles from '../moduleCss/home.module.css';
 
 function HomePage(){
