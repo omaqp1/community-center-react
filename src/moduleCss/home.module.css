@@ -1,4 +1,8 @@
 /* src/App.module.css */
+:root{
+  --bg-main1: hsl(207, 56%, 23%);
+  --bg-main1-dark:hsl(209, 54%, 16%);
+}
 .app {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   direction: rtl;
@@ -11,7 +15,7 @@
 
 /* الهيدر */
 .header {
-  background-color: #1a5d1a;
+  background-color: var(--bg-main1) ;
   color: white;
   padding: 1rem 2rem;
   display: flex;
@@ -33,7 +37,7 @@
 
 .logo {
   background-color: #fff;
-  color: #1a5d1a;
+  color: var(--bg-main1);
   width: 50px;
   height: 50px;
   border-radius: 50%;
@@ -69,7 +73,7 @@
   right: -300px;
   width: 300px;
   height: 100%;
-  background-color: #1a5d1a;
+  background-color: var(--bg-main1);
   color: white;
   transition: right 0.3s ease-in-out;
   z-index: 1001;
@@ -213,13 +217,13 @@
 }
 
 .primaryBtn {
-  background-color: #1a5d1a;
+  background-color: var(--bg-main1);
   color: white;
 }
 
 .secondaryBtn {
   background-color: white;
-  color: #1a5d1a;
+  color: var(--bg-main1);
 }
 
 .primaryBtn:hover, .secondaryBtn:hover {
@@ -239,9 +243,10 @@
 
 /* الورشات */
 .workshops {
-  padding: 4rem 2rem;
+  padding: 3rem 1rem;
   background-color: #f9f9f9;
   text-align: center;
+  margin: 0% auto;
 }
 
 .sectionHeader {
@@ -251,7 +256,7 @@
 
 .sectionHeader h2 {
   font-size: 2rem;
-  color: #1a5d1a;
+  color:  var(--bg-main1);
   margin-bottom: 1rem;
 }
 
@@ -264,10 +269,9 @@
 
 .slider {
   position: relative;
-  max-width: 1000px;
   margin: 0 auto 2rem;
   overflow: hidden;
-  height: 350px;
+  height: 440px;
 }
 
 .slideContainer {
@@ -277,7 +281,7 @@
 }
 
 .slide {
-  min-width: 100%;
+  
   display: flex;
   align-items: center;
   justify-content: center;
@@ -285,16 +289,12 @@
   border-radius: 10px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   padding: 2rem;
-  box-sizing: border-box;
-}
-
-.slideContent {
-  max-width: 600px;
+  
 }
 
 .slide h3 {
   font-size: 1.8rem;
-  color: #1a5d1a;
+  color: var(--bg-main1);
   margin-bottom: 1rem;
 }
 
@@ -304,9 +304,50 @@
   margin-bottom: 1.5rem;
   line-height: 1.6;
 }
+.workshopImage {
+  width: 10rem;
+  max-width: 400px;
+  height: 10rem;
+  margin: 0 auto 1rem;
+  display: block;
+  border-radius: 50%;
+}
+.sliderWrapper {
+  position: relative;
+}
+
+.sliderControls {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  transform: translateY(-50%);
+  pointer-events: none; /* حتى ما يمنعك من الضغط على الصور */
+}
+
+.prevBtn,
+.nextBtn {
+  background-color: rgba(0, 0, 0, 0.5);
+  border: none;
+  color: white;
+  padding: 0.5rem 1rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+  pointer-events: all;
+  border-radius: 50%;
+  z-index: 10;
+  transition: background 0.3s ease;
+}
+
+.prevBtn:hover,
+.nextBtn:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
 
 .detailsBtn {
-  background-color: #1a5d1a;
+  background-color: var(--bg-main1);
   color: white;
   border: none;
   padding: 0.8rem 2rem;
@@ -317,7 +358,7 @@
 }
 
 .detailsBtn:hover {
-  background-color: #134013;
+  background-color: var(--bg-main1-dark);
 }
 
 .prevBtn, .nextBtn {
@@ -367,12 +408,12 @@
 }
 
 .indicator.active {
-  background-color: #1a5d1a;
+  background-color: var(--bg-main1);
 }
 
 .moreBtn {
   display: inline-block;
-  background-color: #1a5d1a;
+  background-color: var(--bg-main1);
   color: white;
   text-decoration: none;
   padding: 0.8rem 2rem;
@@ -382,18 +423,13 @@
 }
 
 .moreBtn:hover {
-  background-color: #134013;
+  background-color:  var(--bg-main1-dark);
 }
 
 @media (max-width: 768px) {
   .workshops {
     padding: 3rem 1rem;
   }
-  
-  .slider {
-    height: 300px;
-  }
-  
   .slide {
     padding: 1.5rem;
   }
@@ -438,7 +474,7 @@
 .logoPlaceholder {
   width: 100px;
   height: 100px;
-  background-color: #1a5d1a;
+  background-color: var(--bg-main1);
   color: white;
   border-radius: 50%;
   display: flex;
@@ -529,7 +565,7 @@
 
 /* الفوتر */
 .footer {
-  background-color: #1a5d1a;
+  background-color: var(--bg-main1);
   color: white;
   padding-top: 3rem;
 }

@@ -14,6 +14,19 @@ import { FaBars,
 import logo from '../assets/logo.png';
 import styles from '../moduleCss/home.module.css';
 
+import chessimg from '../assets/chess.jpeg'
+import plantimg from '../assets/plant.jpeg'
+import songimg from '../assets/song.jpeg'
+import taekwondoimg from '../assets/taekwondo.jpeg'
+import cookingimg from '../assets/cooking.jpeg'
+import drowimg from '../assets/drow.jpeg'
+
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+
 function HomePage(){
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -28,37 +41,37 @@ function HomePage(){
     id: 1,
     title: "ورشة التايكوندو",
     description: "تعلم فنون الدفاع عن النفس وتنمية الثقة بالنفس",
-    image: "https://cdn.pixabay.com/photo/2016/11/29/05/15/taekwondo-1868590_1280.jpg"
+    image: taekwondoimg
   },
   {
     id: 2,
     title: "ورشة الرسم والفنون",
     description: "اكتشف موهبتك الفنية وتعلم تقنيات الرسم المختلفة",
-    image: "https://cdn.pixabay.com/photo/2015/09/09/18/07/girl-932553_1280.jpg"
+    image: drowimg
   },
   {
     id: 3,
-    title: "ورشة البرمجة للأطفال",
-    description: "تعلم أساسيات البرمجة وإنشاء تطبيقاتك الأولى",
-    image: "https://cdn.pixabay.com/photo/2015/06/24/15/45/code-820275_1280.jpg"
+    title: "ورشة الشطرنج للأطفال",
+    description: "تعلم أساسيات الشطرنج وإنشاء التكتيكات الأولى",
+    image: chessimg
   },
   {
     id: 4,
     title: "ورشة الطبخ الصحي",
     description: "تعلم تحضير وجبات صحية ولذيذة لعائلتك",
-    image: "https://cdn.pixabay.com/photo/2017/12/09/08/18/cooking-3000271_1280.jpg"
+    image: cookingimg
   },
   {
     id: 5,
     title: "ورشة الموسيقى والغناء",
     description: "اكتشف عالم النغمات وتعلم العزف على الآلات الموسيقية",
-    image: "https://cdn.pixabay.com/photo/2015/07/17/13/44/guitar-849928_1280.jpg"
+    image: songimg
   },
   {
     id: 6,
     title: "ورشة الزراعة المنزلية",
     description: "تعلم كيفية زراعة الخضروات والفواكه في منزلك",
-    image: "https://cdn.pixabay.com/photo/2017/04/27/08/25/gardening-2261005_1280.jpg"
+    image: plantimg
   }
 ];
 
@@ -179,52 +192,45 @@ function HomePage(){
     <p>اكتشف مجموعة متنوعة من الورشات المصممة لتنمية مهاراتك ومواهبك</p>
   </div>
 
-  <div className={styles.slider}>
-    <button className={styles.prevBtn} onClick={prevSlide}>
-      <FaChevronLeft />
-    </button>
-
-    <div className={styles.slideContainer}>
-      {workshops.map((workshop, index) => (
-        <div
-          key={workshop.id}
-          className={`${styles.slide} ${index === currentSlide ? styles.active : ''}`}
-        >
-          <div className={styles.slideContent}>
-            {workshop.image && (
-              <img
-                src={workshop.image}
-                alt={workshop.title}
-                className={styles.workshopImage}
-              />
-            )}
-            <h3>{workshop.title}</h3>
-            <p>{workshop.description}</p>
-            <button className={styles.detailsBtn}>التفاصيل</button>
-          </div>
+  <Swiper
+    className={styles.slider}
+    modules={[Navigation, Pagination, Autoplay]}
+    spaceBetween={30}
+    slidesPerView={1}
+    navigation={{
+      nextEl: `.${styles.nextBtn}`,
+      prevEl: `.${styles.prevBtn}`,
+    }}
+    pagination={{ clickable: true }}
+    autoplay={{ delay: 5000 }}
+    loop={true}
+  >
+    {workshops.map((workshop) => (
+      <SwiperSlide key={workshop.id} className={styles.slide}>
+        <div className={styles.slideContent}>
+          <img
+            src={workshop.image}
+            className={styles.workshopImage}
+            alt={workshop.title}
+          />
+          <h3>{workshop.title}</h3>
+          <p>{workshop.description}</p>
+          <button className={styles.detailsBtn}>التفاصيل</button>
         </div>
-      ))}
-    </div>
-
-    <button className={styles.nextBtn} onClick={nextSlide}>
-      <FaChevronRight />
-    </button>
-  </div>
-
-  <div className={styles.indicators}>
-    {workshops.map((_, index) => (
-      <div
-        key={index}
-        className={`${styles.indicator} ${index === currentSlide ? styles.active : ''}`}
-        onClick={() => setCurrentSlide(index)}
-      />
+      </SwiperSlide>
     ))}
+  </Swiper>
+
+  <div className={styles.sliderControls}>
+    <button className={styles.prevBtn}><FaChevronLeft /></button>
+    <button className={styles.nextBtn}><FaChevronRight /></button>
   </div>
 
   <a href="/more" className={styles.moreBtn}>
     المزيد من الورشات
   </a>
 </section>
+
 
         {/* قسم الرعاة */}
         <section className={styles.sponsors}>
@@ -314,7 +320,9 @@ function HomePage(){
           <p>&copy; {new Date().getFullYear()} المركز الجماهيري - ضواحي القدس. جميع الحقوق محفوظة.</p>
         </div>
       </footer>
+
     </div>
+    
   );
 };
 
