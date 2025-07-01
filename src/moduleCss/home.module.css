@@ -42,7 +42,188 @@
 
 .logoText {
   font-size: 1.1rem;
-  font-weight: 500;
+  font-weight: 600;
+}
+
+/*a links in navbar*/
+.headernav{
+  text-align: center;
+}
+.headernav ul{
+  display: flex;
+ 
+}
+.headernav li{
+  list-style: none;
+  gap: 80px;
+}
+.headernav li a{
+  text-decoration: none;
+  font-size: 1.3rem;
+  color: var(--bg-main1);
+  border-radius: 10px;
+  padding: 7px;
+  border: var(--bg-main1) 2px solid;
+  font-weight: 600;
+}
+.headernav li a:hover{
+  color: #fff;
+  background-color: var(--bg-main1);
+  border: #fff 2px solid;
+}
+@media (max-width:2000px){
+  .headernav ul{
+  gap: 60px;
+  }
+  
+  .headernav ul li a{
+    font-size: 102%;
+  }
+}
+@media (max-width:1400px){
+  .headernav ul{
+    gap: 50px;
+  }
+  .headernav ul li a{
+    font-size: 90%;
+  }
+}
+@media (max-width:1200px){
+  .headernav ul{
+    gap: 30px;
+  }
+}
+@media (max-width:1020px){
+  .headernav ul{
+    display: none;
+  }
+  
+}
+/*the end of a links in navbar*/
+.logoContainer {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.menuButton {
+  background: none;
+  border: none;
+  color: var(--bg-main1);
+  font-size: 2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.languageContainer {
+  position: relative;
+}
+
+.dropdownButton {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  border: var(--bg-main1) 2px solid;
+  padding: 4px 2px 1px 2px;
+  border-radius: 7px;
+  color: var(--bg-main1);
+}
+.dropdownButton:hover{
+  color: #fff;
+  background-color: var(--bg-main1);
+}
+.dropdownMenu {
+  position: absolute;
+  top: 120%; /* ينزل القائمة شوي لتحت الزر */
+  right: 0;
+  background-color: rgb(233, 233, 233);
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  z-index: 999;
+  min-width: 120px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  padding: 0.5rem 0;
+}
+.userIcon{
+  color: #fff;
+  background-color: var(--bg-main1);
+  padding: 8px;
+  border: #fff 2px solid;
+  border-radius: 10px;
+}
+.userIcon:hover{
+  color: var(--bg-main1);
+  background-color: #fff;
+  border: 2px solid var(--bg-main1);
+}
+@media(max-width:2000px){
+  .dropdownButton{
+    padding: 10px;
+    font-size: 1.6rem;
+  }
+  .userIcon{
+    font-size: 1.7rem
+  }
+  .menuButton{
+    font-size: 2rem;
+  }
+}
+
+@media(max-width:1400px){
+  .dropdownButton{
+    padding: 7px 7px 2px 7px;
+    font-size: 1.6rem;
+  }
+  .userIcon{
+    font-size: 1.5rem;
+  }
+}
+
+@media(max-width:1200px){
+  .dropdownButton{
+    padding: 6px 6px 1px 6px;
+    font-size: 1.1rem;
+  }
+  .userIcon{
+    font-size: 1.2rem;
+  }
+}
+@media(max-width:1020px){
+  .dropdownButton{
+    padding: 7px 7px 2px 7px;
+    font-size: 1.48rem;
+  }
+  .userIcon{
+    margin-right: 6px;
+  }
+}
+@media(max-width:768px){
+  .dropdownButton{
+    padding: 6px 6px 1px 6px;
+    font-size: 1.3rem;
+  }
+}
+@media(max-width:576px){
+  .dropdownButton{
+    padding: 6px 6px 1px 6px;
+    font-size: 1.2rem;
+    margin-left: 7px;
+  }
+}
+@media(max-width:576px){
+  .dropdownButton{
+    padding: 3px;
+    font-size: 1rem;
+    margin-left: 7px;
+  }
+  .userIcon{
+    font-size: .8rem;
+  }
+  .menuButton{
+    font-size: 1.5rem;
+    margin-left: 10px;
+  }
 }
 @media (max-width: 3000px){
   .logo {
@@ -84,20 +265,20 @@
 }
 @media (max-width: 768px) {
   .logo {
-    width: 60px;
-    height: 50px;
+    width: 70px;
+    height: 60px;
   }
   .logoText {
-    font-size: .92rem;
+    font-size: 1.2rem;
   }
 }
 @media (max-width: 576px){
 .logo {
-    width: 55px;
-    height: 40px;
+    width: 60px;
+    height: 45px;
   }
   .logoText {
-    font-size: .7rem;
+    font-size: 1.02rem;
   }
 }
 @media (max-width: 400px){
@@ -106,25 +287,26 @@
     height: 40px;
   }
   .logoText {
-    font-size: .6rem;
+    font-size: 1rem;
   }
 }
+.dropdownItem {
+  display: block;
+  padding: 8px 12px;
+  text-decoration: none;
+  color: black;
+  transition: background 0.2s;
+  border-radius: 10px;
+}
 
-.logoContainer {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
+.dropdownItem:hover {
+  
+  background-color: var(--bg-main1);
+  color: #fff;
+  
+
 }
-.menuButton {
-  background: none;
-  border: none;
-  color: var(--bg-main1);
-  font-size: 1.5rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+
 /* السايدبار */
 .sidebar {
   position: fixed;

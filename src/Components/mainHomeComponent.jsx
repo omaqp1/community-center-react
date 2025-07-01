@@ -9,10 +9,15 @@ import { FaBars,
         FaInstagram,
          FaPhone,
           FaEnvelope,
-           FaMapMarkerAlt } from 'react-icons/fa';
+           FaMapMarkerAlt, 
+           FaGlobe,
+           FaUser} from 'react-icons/fa';
            
 import logo from '../assets/logo.png';
 import styles from '../moduleCss/home.module.css';
+
+import { Link, useNavigate } from 'react-router-dom';
+
 
 import chessimg from '../assets/chess.jpeg'
 import plantimg from '../assets/plant.jpeg'
@@ -27,7 +32,23 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 
+
+
 function HomePage(){
+                    const navigate = useNavigate();
+                      function changeLanguageAr() {
+                      navigate('/');
+                    }
+                    function changeLanguageEn() {
+                      navigate('/enHomepage');
+                    }
+                    function changeLanguageHe() {
+                      navigate('/heHomepage');
+                    }
+                    function LogInOrSignIn() {
+                      navigate('/logInOrSignIn');
+                    }
+
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [language, setLanguage] = useState('عربي');
@@ -35,6 +56,12 @@ function HomePage(){
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
   };
+  const [open, setOpen] = useState(false);
+  const languages = [
+    { code: 'ar', name: 'العربية', path: '/' },
+    { code: 'en', name: 'English', path: '/enHomepage' },
+    { code: 'he', name: 'עברית', path: '/heHomepage' },
+  ];
 
   const workshops = [
   {
@@ -109,18 +136,70 @@ function HomePage(){
     setCurrentSlide((prev) => (prev - 1 + workshops.length) % workshops.length);
   };
 
+  // Create a ref for the dropdown menu
+  const dropdownRef = React.useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   return (
     <div className={styles.app}>
       {/* الهيدر */}
       <header className={styles.header}>
-        <div className={styles.logoContainer}>
-          <img className={styles.logo} src={logo}/>
-          <div className={styles.logoText}>المركز الجماهيري - ضواحي القدس</div>
-        </div>
         <button className={styles.menuButton} onClick={toggleSidebar}>
           <FaBars />
         </button>
-      </header>
+
+      <div className={styles.logoContainer}>
+        <img className={styles.logo} src={logo} alt="شعار المركز" />
+        <div className={styles.logoText}>المركز الجماهيري - ضواحي القدس</div>
+      </div>
+  {/* /////////////// header nav bar //////////////////////////// */}
+      <nav className={styles.headernav}>
+          <ul>
+            <li><a href="#about">من نحن</a></li>
+            <li><a href="#workshops">الورشات</a></li>
+            <li><a href="#events">الفعاليات</a></li>
+            <li><a href="#contact">تواصل معنا</a></li>
+          </ul>
+        </nav>
+
+      {/* زر اللغة + القائمة */}
+      <div className={styles.languageContainer} ref={dropdownRef}>
+        <button
+          onClick={() => setOpen(!open)}
+          className={styles.dropdownButton}
+        >
+          <FaGlobe />
+        </button>
+
+        {open && (
+          <div className={styles.dropdownMenu}>
+            {languages.map((lang) => (
+              <Link
+                key={lang.code}
+                to={lang.path}
+                className={styles.dropdownItem}
+                onClick={() => setOpen(false)}
+              >
+                {lang.name}
+              </Link>
+            ))}
+          </div>
+        )}
+      </div>
+
+      <Link to="/logInOrSignIn" className={styles.userIcon}>
+        <FaUser />
+      </Link>
+    </header>
 
       {/* السايدبار */}
       <div className={`${styles.sidebar} ${sidebarOpen ? styles.open : ''}`}>
@@ -135,19 +214,19 @@ function HomePage(){
           <div className={styles.languageButtons}>
             <button 
               className={`${styles.langBtn} ${language === 'عربي' ? styles.active : ''}`}
-              onClick={() => changeLanguage('عربي')}
+              onClick={() => changeLanguageAr()}
             >
               عربي
             </button>
             <button 
               className={`${styles.langBtn} ${language === 'English' ? styles.active : ''}`}
-              onClick={() => changeLanguage('English')}
+              onClick={() => changeLanguageEn()}
             >
               English
             </button>
             <button 
               className={`${styles.langBtn} ${language === 'עברית' ? styles.active : ''}`}
-              onClick={() => changeLanguage('עברית')}
+              onClick={() => changeLanguageHe()}
             >
               עברית
             </button>
