@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; 
-import styles from '../moduleCss/LogInOrSignIn.module.css';
+import styles from '../moduleCss/l-spage.module.css';
 import { FaGoogle, FaTwitter, FaApple, FaFacebookF, FaEye, FaEyeSlash, FaArrowRight } from 'react-icons/fa';
 
 function LogInOrSignIn() {
