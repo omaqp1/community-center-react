@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; 
-import styles from '../moduleCss/LoginOrSignIn.module.css';
+import styles from '../moduleCss/logInOrSignIn.module.css';
 import { FaGoogle, FaTwitter, FaApple, FaFacebookF, FaEye, FaEyeSlash, FaArrowRight } from 'react-icons/fa';
 
 function LogInOrSignIn() {
@@ -36,7 +36,7 @@ function LogInOrSignIn() {
         <FaArrowRight className={styles.backIcon} />
         <span>رجوع</span>
       </div>
-      
+
     <div className={styles.container}>
       
       
