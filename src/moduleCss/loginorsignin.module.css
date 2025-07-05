@@ -36,12 +36,13 @@
     display: flex;
     position: fixed;
     background-color: #ffffff46;
-    backdrop-filter: blur(4px);
+    backdrop-filter: blur(4.2px);
     padding: 7px;
     border-radius: 10px;
     cursor: pointer;
     margin: 15px;
-    color: white;
+    color: rgb(252, 252, 252);
+
 }
 .logoContainer {
   margin-bottom: 20px;

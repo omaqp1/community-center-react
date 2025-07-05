@@ -36,7 +36,7 @@ function LogInOrSignIn() {
         <FaArrowRight className={styles.backIcon} />
         <span>رجوع</span>
       </div>
-
+      
     <div className={styles.container}>
       
       
