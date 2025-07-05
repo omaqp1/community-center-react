@@ -1,6 +1,7 @@
 /* src/App.module.css */
 :root{
-  --bg-main1: hsl(207, 56%, 23%);
+  --bg-main1-light:hsl(207, 67%, 43%);
+  --bg-main1: hsl(207, 59%, 31%);
   --bg-main1-dark:hsl(209, 54%, 16%);
 }
 .app {
@@ -12,7 +13,17 @@
   display: flex;
   flex-direction: column;
 }
-
+@keyframes colorVal{
+  0%{
+    border-bottom: 2px solid var(--bg-main1-light);
+  }
+  50%{
+    border-bottom: 2px solid var(--bg-main1);
+  }
+  100%{
+    border-bottom: 2px solid var(--bg-main1-light);
+  }
+}
 /* الهيدر */
 .header {
   background-color: white;
@@ -27,6 +38,7 @@
   right: 0;
   z-index: 1000;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  animation: colorVal infinite 3s ease-in-out;
 }
 
 
@@ -743,8 +755,150 @@
     gap: 1rem;
   }
 }
+/*------------- قسم الادارة ---------*/
+.managementData {
+  padding: 50px 20px;
+  background: linear-gradient(135deg, #f0f4ff, #dce3ff);
+  text-align: center;
+}
 
-/* من نحن */
+.managementData > h3 {
+  font-size: 2.5rem;
+  margin-bottom: 40px;
+  color: #1f1f1f;
+  font-weight: bold;
+  position: relative;
+}
+
+.managementData > h3::after {
+  content: "";
+  width: 60px;
+  height: 4px;
+  background: #4e6eff;
+  display: block;
+  margin: 10px auto 0;
+  border-radius: 10px;
+}
+
+/* حاوية الكروت */
+.managementDataWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+}
+
+/* الكرت */
+.managementDataslide {
+  background-color: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: row;
+  max-width: 600px;
+  width: 100%;
+  padding: 20px;
+  align-items: center;
+  gap: 20px;
+  transition: transform 0.3s ease;
+}
+
+.managementDataslide:hover {
+  transform: translateY(-10px);
+}
+
+
+.managementDataImage {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid var(--bg-main1-light);
+}
+
+.managementDataslideContent {
+  flex: 1;
+  text-align: start;
+}
+
+.managementDataslideContent h3 {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.managementDataslideContent p {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 15px;
+}
+
+.managementDataBtn {
+  background-color: var(--bg-main1);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  margin-bottom: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.managementDataBtn:hover {
+  background-color: var(--bg-main1-dark);
+}
+
+.managementDataslideContent ul {
+  display: flex;
+  gap: 15px;
+  list-style: none;
+  padding: 0;
+}
+
+.managementDataslideContent ul li a {
+  color: var(--bg-main1-light);
+  font-size: 1.2rem;
+  transition: transform 0.2s, color 0.3s;
+}
+
+.managementDataslideContent ul li a:hover {
+  transform: scale(1.2);
+  color: #1f1f1f;
+}
+
+/* Responsive - لما العرض يصير صغير */
+@media (max-width: 768px) {
+  .managementDataslide {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .managementDataslideContent {
+    text-align: center;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*----------------------------- من نحن ------------*/
 .about {
   padding: 4rem 2rem;
   background-color: #f0f7f0;

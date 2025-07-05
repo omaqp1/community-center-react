@@ -241,6 +241,7 @@ function HomePage() {
 
         <nav className={styles.nav}>
           <ul>
+            <li><a href='/logInOrSignIn'>تسجيل دخول</a></li>
             <li><a href="#about">من نحن</a></li>
             <li><a href="#workshops">الورشات</a></li>
             <li><a href="#events">الفعاليات</a></li>
@@ -317,7 +318,7 @@ function HomePage() {
         </section>
 
         {/* قسم الرعاة */}
-        <section className={styles.sponsors}>
+        <section className={styles.sponsors} id=''>
           <div className={styles.sectionHeader}>
             <h2>رعاة المركز</h2>
             <p>نشكر رعاة المركز على دعمهم المتواصل لبرامجنا وفعالياتنا</p>
@@ -363,26 +364,31 @@ function HomePage() {
         </section>
       </main>
               {/* قسم الادارة */}
-          <section className={styles.edara}>
-            <h3>
-              الإدارة
-            </h3>
-            
-              {managementData.map((managementData) => (
-                <div key={managementData.id} className={styles.slide}>
-                  <div className={styles.slideContent}>
-                    <img
-                      src={managementData.image}
-                      className={styles.managementDataImage}
-                      alt={managementData.title}
-                    />
-                    <h3>{managementData.name}</h3>
-                    <p>{managementData.p}</p>
-                    <button className={styles.detailsBtn}>تواصل</button>
-                  </div>
-                </div>
-              ))}
-          </section>
+          <section className={styles.managementData}>
+  <h3>الإدارة</h3>
+  <div className={styles.managementDataWrapper}>
+    {managementData.map((managementData) => (
+      <div key={managementData.id} className={styles.managementDataslide}>
+        <img
+          src={managementData.image}
+          className={styles.managementDataImage}
+          alt={managementData.title}
+        />
+        <div className={styles.managementDataslideContent}>
+          <h3>{managementData.managementDataName}</h3>
+          <p>{managementData.p}</p>
+          <button className={styles.managementDataBtn}>تواصل</button>
+          <ul>
+            <li><a><FaInstagram /></a></li>
+            <li><a><FaFacebookF /></a></li>
+            <li><a><FaTwitter /></a></li>
+          </ul>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
 
       {/* الفوتر */}
       <footer className={styles.footer}>

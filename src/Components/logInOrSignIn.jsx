@@ -1,107 +1,132 @@
-//loginorsignin.jsx
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'; 
+import styles from '../moduleCss/LoginOrSignIn.module.css';
+import { FaGoogle, FaTwitter, FaApple, FaFacebookF, FaEye, FaEyeSlash, FaArrowRight } from 'react-icons/fa';
 
 function LogInOrSignIn() {
-  
   const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [role, setRole] = useState('user'); // لو بدك تتحكم بالدور
-  const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState(null); // رسالة نجاح أو خطأ
-  const navigate = useNavigate();
+  const [role, setRole] = useState('user');
+  const [message, setMessage] = useState(null);
+  const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate(); 
 
-  async function handleSubmit(e) {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setLoading(true);
-    setMessage(null);
-
-    const endpoint = isLogin ? 'login' : 'register';
-
-    try {
-      const res = await fetch(`http://localhost:3001/${endpoint}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password, role }),
+    if (email && password) {
+      setMessage({
+        type: 'success',
+        text: isLogin ? 'تم تسجيل الدخول بنجاح!' : 'تم إنشاء الحساب بنجاح!',
       });
 
-      const data = await res.json();
-
-      if (!res.ok) {
-        setMessage({ type: 'error', text: data.message || 'حدث خطأ غير معروف' });
-      } else {
-        if (isLogin) {
-          localStorage.setItem('token', data.token);
-          setMessage({ type: 'success', text: 'تم تسجيل الدخول بنجاح!' });
-          // تأخير بسيط قبل التنقل عشان تشوف الرسالة
-          setTimeout(() => navigate('/'), 1000);
-        } else {
-          setMessage({ type: 'success', text: 'تم إنشاء الحساب بنجاح! سجل دخولك الآن.' });
-          setIsLogin(true);
-          setEmail('');
-          setPassword('');
-          setRole('user');
-        }
+      if (isLogin) {
+        setTimeout(() => navigate('/'), 1100); // ✅ التنقل بعد ثانية 
       }
-    } catch (err) {
-      setMessage({ type: 'error', text: 'فشل الاتصال بالخادم، حاول مرة ثانية' });
-    } finally {
-      setLoading(false);
+    } else {
+      setMessage({ type: 'error', text: 'يرجى تعبئة جميع الحقول' });
     }
-  }
+  };
 
   return (
-    <div style={{ textAlign: 'center', marginTop: 50 }}>
-      <h2>{isLogin ? 'تسجيل الدخول' : 'إنشاء حساب'}</h2>
 
-      <form onSubmit={handleSubmit}>
-        <input
-          type="email"
-          placeholder="الإيميل"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-          disabled={loading}
-        />
-        <br /><br />
+    <>
+    {/*  زر الرجوع */}
+      <div className={styles.backBtn} onClick={() => navigate(-1)}>
+        <FaArrowRight className={styles.backIcon} />
+        <span>رجوع</span>
+      </div>
 
-        <input
-          type="password"
-          placeholder="كلمة المرور"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-          disabled={loading}
-        />
-        <br /><br />
+    <div className={styles.container}>
+      
+      
 
-        
-        
-        <button type="submit" disabled={loading}>
-          {loading ? 'جارٍ المعالجة...' : isLogin ? 'دخول' : 'تسجيل'}
-        </button>
-      </form>
+      <div className={styles.logoContainer}>
+        <div className={styles.logo}>المركز الجماهيري - ضواحي القدس</div>
+        <div className={styles.alirt}>ملاحظة: لم يتم ربط هذه الصفحة بأي قواعد بيانات بعد</div>
+      </div>
 
-      {message && (
-        <p style={{ color: message.type === 'error' ? 'red' : 'green', marginTop: 20 }}>
-          {message.text}
+      <div className={styles.card}>
+        <h2 className={styles.title}>{isLogin ? 'تسجيل الدخول' : 'إنشاء حساب'}</h2>
+
+        <div className={styles.socialButtons}>
+          <button className={`${styles.socialBtn} ${styles.google}`}><FaGoogle /> عبر Google</button>
+          <button className={`${styles.socialBtn} ${styles.twitter}`}><FaTwitter /> عبر Twitter</button>
+          <button className={`${styles.socialBtn} ${styles.apple}`}><FaApple /> عبر Apple</button>
+          <button className={`${styles.socialBtn} ${styles.facebook}`}><FaFacebookF /> عبر Facebook</button>
+        </div>
+
+        <div className={styles.divider}>
+          <span className={styles.dividerLine}></span>
+          <span className={styles.dividerText}>أو</span>
+          <span className={styles.dividerLine}></span>
+        </div>
+
+        <form className={styles.form} onSubmit={handleSubmit}>
+          <div className={styles.inputGroup}>
+            <input
+              type="email"
+              placeholder="الإيميل"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              className={styles.input}
+            />
+          </div>
+
+          <div className={styles.inputGroup}>
+            <input
+              type={showPassword ? "text" : "password"}
+              placeholder="كلمة المرور"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              className={styles.input}
+            />
+            <button 
+              type="button" 
+              className={styles.passwordToggle}
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? <FaEyeSlash /> : <FaEye />}
+            </button>
+          </div>
+
+          <button type="submit" className={styles.button}>
+            {isLogin ? 'دخول' : 'تسجيل'}
+          </button>
+        </form>
+
+        {message && (
+          <p className={`${styles.message} ${message.type === 'error' ? styles.error : styles.success}`}>
+            {message.text}
+          </p>
+        )}
+
+        <p className={styles.toggle}>
+          {isLogin ? 'ما عندك حساب؟' : 'عندك حساب؟'}{' '}
+          <button
+            type="button"
+            onClick={() => {
+              setIsLogin(!isLogin);
+              setMessage(null);
+              setEmail('');
+              setPassword('');
+              setRole('user');
+            }}
+            className={styles.switchButton}
+          >
+            {isLogin ? 'أنشئ حساب' : 'سجّل دخول'}
+          </button>
         </p>
-      )}
+      </div>
 
-      <p style={{ marginTop: 20 }}>
-        {isLogin ? 'ما عندك حساب؟' : 'عندك حساب؟'}{' '}
-        <button onClick={() => {
-          setIsLogin(!isLogin);
-          setMessage(null);
-          setEmail('');
-          setPassword('');
-          setRole('user');
-        }}>
-          {isLogin ? 'أنشئ حساب' : 'سجّل دخول'}
-        </button>
-      </p>
+      <div className={styles.footer}>
+        <p>© {new Date().getFullYear()}  المركز الجماهيري. جميع الحقوق محفوظة.</p>
+      </div>
     </div>
+    </>
+    
   );
 }
 
