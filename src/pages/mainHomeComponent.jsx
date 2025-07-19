@@ -1,0 +1,450 @@
+// src/mainHomeComponent
+import React, { useState, useEffect, useRef } from 'react';
+import {
+  FaBars,
+  FaTimes,
+  FaChevronRight,
+  FaChevronLeft,
+  FaFacebookF,
+  FaTwitter,
+  FaInstagram,
+  FaPhone,
+  FaEnvelope,
+  FaMapMarkerAlt,
+  FaGlobe,
+  FaUser
+} from 'react-icons/fa';
+import { GiRotaryPhone } from "react-icons/gi";
+import logo from '../assets/logo.png';
+import styles from '../moduleCss/home.module.css';
+
+import { Link, useNavigate } from 'react-router-dom';
+
+import chessimg from '../assets/chess.jpeg';
+import plantimg from '../assets/plant.jpeg';
+import songimg from '../assets/song.jpeg';
+import taekwondoimg from '../assets/taekwondo.jpeg';
+import cookingimg from '../assets/cooking.jpeg';
+import drowimg from '../assets/drow.jpeg';
+
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+
+function HomePage() {
+  const navigate = useNavigate();
+  const info = [
+    {
+      location: 'كفر عقب - بجانب سوبر ماركت اورلند - شارع المطار',
+      phone: '0733330869',
+      celPhone: '054-1234567'
+    }
+  ];
+
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [language, setLanguage] = useState('عربي');
+  const [open, setOpen] = useState(false);
+
+  const languages = [
+    { code: 'ar', name: 'العربية', path: '/' },
+    { code: 'en', name: 'English', path: '/enHomepage' },
+    { code: 'he', name: 'עברית', path: '/heHomepage' },
+  ];
+    const workshops = [
+  {
+    id: 1,
+    title: "ورشة التايكوندو",
+    description: "تعلم فنون الدفاع عن النفس وتنمية الثقة بالنفس",
+    image: taekwondoimg
+  },
+  {
+    id: 2,
+    title: "ورشة الرسم والفنون",
+    description: "اكتشف موهبتك الفنية وتعلم تقنيات الرسم المختلفة",
+    image: drowimg
+  },
+  {
+    id: 3,
+    title: "ورشة الشطرنج للأطفال",
+    description: "تعلم أساسيات الشطرنج وإنشاء التكتيكات الأولى",
+    image: chessimg
+  },
+  {
+    id: 4,
+    title: "ورشة الطبخ الصحي",
+    description: "تعلم تحضير وجبات صحية ولذيذة لعائلتك",
+    image: cookingimg
+  },
+  {
+    id: 5,
+    title: "ورشة الموسيقى والغناء",
+    description: "اكتشف عالم النغمات وتعلم العزف على الآلات الموسيقية",
+    image: songimg
+  },
+  {
+    id: 6,
+    title: "ورشة الزراعة المنزلية",
+    description: "تعلم كيفية زراعة الخضروات والفواكه في منزلك",
+    image: plantimg
+  }
+];
+ 
+  const managementData = [
+  {
+    id: 1,
+    name: "اسم",
+    p: "المدير",
+    image: 'https://www.gravatar.com/avatar/?d=mp'
+  },
+  {
+    id: 2,
+    name: "اسم",
+    p: "نائب المدير",
+    image: "https://www.gravatar.com/avatar/?d=mp"
+  },
+  {
+    id: 3,
+    name: "اسم ",
+    p: "السكرتيرا",
+    image: "https://www.gravatar.com/avatar/?d=mp"
+  }
+];
+
+  const sections = [
+    { id: 1, name: "قسم الخدمة الاجتماعية", owner: "اسما ابو رمية", img: "https://www.gravatar.com/avatar/?d=mp", fact: "" },
+    { id: 2, name: "قسم الشبيبة", owner: "هدى سلهب", img: "https://www.gravatar.com/avatar/?d=mp", fact: "مركز تعليمي", fact2: "دورات", fact3: "برامج تنشيطية", page: "/shpebaSec" },
+    { id: 3, name: "قسم النساء", owner: "نور", img: "https://www.gravatar.com/avatar/?d=mp", fact: "ورشات" },
+    { id: 4, name: "قسم الاحتياجات الخاصة", owner: "ايناس السلايمة", img: "https://www.gravatar.com/avatar/?d=mp", fact: "" },
+    { id: 5, name: "قسم الثقافة", owner: "ايناس ابو حمدة", img: "https://www.gravatar.com/avatar/?d=mp", fact: "نادي اطفال" },
+    { id: 6, name: "قسم المسنين", owner: "مروى حلواني", img: "https://www.gravatar.com/avatar/?d=mp", fact: "ورشات", fact2: "جولات", fact3: "رحل", fact4: "انشطة" },
+    { id: 7, name: "###########", owner: "حسان الحلواني", img: "https://www.gravatar.com/avatar/?d=mp", fact: "" },
+  ];
+
+  const toggleSidebar = () => {
+    setSidebarOpen(!sidebarOpen);
+  };
+
+  const changeLanguageAr = () => {
+    setLanguage('عربي');
+    navigate('/');
+    setSidebarOpen(false);
+  };
+  const changeLanguageEn = () => {
+    setLanguage('English');
+    navigate('/enHomepage');
+    setSidebarOpen(false);
+  };
+  const changeLanguageHe = () => {
+    setLanguage('עברית');
+    navigate('/heHomepage');
+    setSidebarOpen(false);
+  };
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % workshops.length);
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [workshops.length]);
+
+  const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  return (
+    <div className={styles.app}>
+      {/* الهيدر */}
+      <header className={styles.header}>
+        <button className={styles.menuButton} onClick={toggleSidebar}>
+          <FaBars />
+        </button>
+
+        <div className={styles.logoContainer}>
+          <img className={styles.logo} src={logo} alt="شعار المركز" />
+          <div className={styles.logoText}>المركز الجماهيري - ضواحي القدس</div>
+        </div>
+        {/* /////////////// header nav bar //////////////////////////// */}
+        <nav className={styles.headernav}>
+          <ul>
+            <li><a href="#about">من نحن</a></li>
+            <li><a href="#workshops">الورشات</a></li>
+            <li><a href="#events">الفعاليات</a></li>
+            <li><a href="#contact">تواصل معنا</a></li>
+          </ul>
+        </nav>
+
+        {/* زر اللغة + القائمة */}
+        <div className={styles.languageContainer} ref={dropdownRef}>
+          <button
+            onClick={() => setOpen(!open)}
+            className={styles.dropdownButton}
+          >
+            <FaGlobe />
+          </button>
+
+          {open && (
+            <div className={styles.dropdownMenu}>
+              {languages.map((lang) => (
+                <Link
+                  key={lang.code}
+                  to={lang.path}
+                  className={styles.dropdownItem}
+                  onClick={() => setOpen(false)}
+                >
+                  {lang.name}
+                </Link>
+              ))}
+            </div>
+          )}
+        </div>
+
+        <Link to="/logInOrSignIn" className={styles.userIcon}>
+          <FaUser />
+        </Link>
+      </header>
+
+      {/* السايدبار */}
+      <div className={`${styles.sidebar} ${sidebarOpen ? styles.open : ''}`}>
+        <div className={styles.sidebarHeader}>
+          <button className={styles.closeButton} onClick={toggleSidebar}>
+            <FaTimes />
+          </button>
+        </div>
+
+        <div className={styles.languageSelector}>
+          <h3>تغيير اللغة</h3>
+          <div className={styles.languageButtons}>
+            <button
+              className={`${styles.langBtn} ${language === 'عربي' ? styles.active : ''}`}
+              onClick={changeLanguageAr}
+            >
+              عربي
+            </button>
+            <button
+              className={`${styles.langBtn} ${language === 'English' ? styles.active : ''}`}
+              onClick={changeLanguageEn}
+            >
+              English
+            </button>
+            <button
+              className={`${styles.langBtn} ${language === 'עברית' ? styles.active : ''}`}
+              onClick={changeLanguageHe}
+            >
+              עברית
+            </button>
+          </div>
+        </div>
+
+        <nav className={styles.nav}>
+          <ul>
+            <li><a href='/logInOrSignIn'>تسجيل دخول</a></li>
+            <li><a href="#about">من نحن</a></li>
+            <li><a href="#workshops">الورشات</a></li>
+            <li><a href="#events">الفعاليات</a></li>
+            <li><a href="#contact">تواصل معنا</a></li>
+          </ul>
+        </nav>
+
+        <div className={styles.contactInfo}>
+          <h3>معلومات التواصل</h3>
+          <p><FaPhone /> {info[0].phone}</p>
+          <p><GiRotaryPhone /> {info[0].celPhone}</p>
+          <p><FaMapMarkerAlt /> {info[0].location}</p>
+        </div>
+      </div>
+
+      {/* المحتوى الرئيسي */}
+      <main>
+        {/* قسم البطل */}
+        <section className={styles.hero}>
+          <div className={styles.heroContent}>
+            <h1>مرحباً بكم في المركز الجماهيري بضواحي القدس</h1>
+            <p>مكان يجتمع فيه المجتمع لبناء مستقبل أفضل معاً</p>
+            <div className={styles.ctaButtons}>
+              <button className={styles.primaryBtn}>انضم إلينا</button>
+              <button className={styles.secondaryBtn}>تعرف على فعالياتنا</button>
+            </div>
+          </div>
+        </section>
+
+        {/* قسم الورشات */}
+        <section id="workshops" className={styles.workshops}>
+          <div className={styles.sectionHeader}>
+            <h2>ورشاتنا التثقيفية</h2>
+            <p>اكتشف مجموعة متنوعة من الورشات المصممة لتنمية مهاراتك ومواهبك</p>
+          </div>
+
+          <Swiper
+            className={styles.slider}
+            modules={[Navigation, Pagination, Autoplay]}
+            spaceBetween={30}
+            slidesPerView={1}
+            navigation={{
+              nextEl: `.${styles.nextBtn}`,
+              prevEl: `.${styles.prevBtn}`,
+            }}
+            pagination={{ clickable: true }}
+            autoplay={{ delay: 5000 }}
+            loop={true}
+          >
+            {workshops.map((workshop) => (
+              <SwiperSlide key={workshop.id} className={styles.slide}>
+                <div className={styles.slideContent}>
+                  <img
+                    src={workshop.image}
+                    className={styles.workshopImage}
+                    alt={workshop.title}
+                  />
+                  <h3>{workshop.title}</h3>
+                  <p>{workshop.description}</p>
+                  <button className={styles.detailsBtn}>التفاصيل</button>
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+
+          <div className={styles.sliderControls}>
+            <button className={styles.prevBtn}><FaChevronLeft /></button>
+            <button className={styles.nextBtn}><FaChevronRight /></button>
+          </div>
+
+          <a href="/more" className={styles.moreBtn}>
+            المزيد من الورشات
+          </a>
+        </section>
+        {/* قسم الاقسام */}
+        <section className={styles.sections} id="sections">
+          <div className={styles.sectionHeader}>
+            <h2>أقسام المركز</h2>
+            <p>استكشف الأقسام المختلفة التي يقدمها المركز</p>
+          </div>
+
+            <div className={styles.sectionsGrid}>
+              {sections.map((section) => {
+                const activities = [section.fact, section.fact2, section.fact3, section.fact4].filter(Boolean);
+                const hasImage = section.img && section.img.trim() !== '';
+
+                return (
+                  <div
+                    key={section.id}
+                    className={`${styles.sectionCard} ${section.id === 7 ? styles.sponsorsSection : ''}`}
+                  >
+                    <div className={styles.logoContainer1}>
+                      <img
+                        src={hasImage ? section.img : "https://www.gravatar.com/avatar/?d=mp"}
+                        alt={section.name}
+                        className={styles.sectionImage}
+                      />
+                    </div>
+
+                    <div className={styles.sectionContent}>
+                      <h3 className={styles.sectionName}>{section.name}</h3>
+                      <p className={styles.sectionOwner}><strong>المسؤول:</strong> {section.owner}</p>
+
+                      {activities.length > 0 && (
+                        <div className={styles.sectionActivities}>
+                          <strong>الأنشطة:</strong>
+                          <div className={styles.tags}>
+                            {activities.map((activity, index) => (
+                              <span key={index} className={styles.tag}>{activity}</span>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                      <button className={styles.sectionButton} onClick={() => navigate(`${section.page}`)}>المزيد</button>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </section>
+
+        {/* قسم من نحن */}
+        <section id="about" className={styles.about}>
+          <div className={styles.sectionHeader}>
+            <h2>من نحن</h2>
+            <p>تعرف على المركز الجماهيري ورسالتنا وأهدافنا</p>
+          </div>
+
+          <div className={styles.aboutContent}>
+            <div className={styles.aboutText}>
+              <p>
+                المركز الجماهيري في ضواحي القدس هو مؤسسة مجتمعية تأسست عام 2005 بهدف خدمة المجتمع المحلي وتنمية قدرات أفراده.
+                نسعى لخلق بيئة تعليمية وترفيهية للجميع من خلال تقديم برامج متنوعة تلبي احتياجات مختلف الفئات العمرية.
+              </p>
+              <p>
+                نؤمن بأهمية العمل الجماعي ودوره في بناء مجتمع قوي ومتماسك. نسعى لتمكين الأفراد وتطوير مهاراتهم من خلال ورشات العمل والدورات التدريبية والفعاليات الثقافية والاجتماعية.
+              </p>
+              <ul className={styles.missionList}>
+                <li>تنمية المهارات الشخصية والمهنية</li>
+                <li>تعزيز القيم المجتمعية والهوية الثقافية</li>
+                <li>توفير فرص تعليمية وترفيهية للجميع</li>
+                <li>دعم المبادرات الشبابية والمشاريع المجتمعية</li>
+              </ul>
+            </div>
+            <div className={styles.aboutImage}></div>
+          </div>
+          <button onClick={() => navigate('/error')} className={styles.learnMoreBtn}>من نحن</button>
+        </section>
+      </main>
+
+
+      {/* الفوتر */}
+      <footer className={styles.footer}>
+        <div className={styles.footerContent}>
+          <div className={styles.footerSection}>
+            <h3>عن المركز</h3>
+            <p>المركز الجماهيري في ضواحي القدس هو مؤسسة مجتمعية تهدف إلى تنمية المجتمع المحلي وتقديم خدمات ثقافية وترفيهية وتعليمية لجميع الفئات العمرية.</p>
+          </div>
+
+          <div className={styles.footerSection}>
+            <h3>روابط سريعة</h3>
+            <ul>
+              <li><a href="#about">من نحن</a></li>
+              <li><a href="#workshops">الورشات</a></li>
+              <li><a href="#events">الفعاليات</a></li>
+              <li><a href="#contact">اتصل بنا</a></li>
+            </ul>
+          </div>
+
+          <div className={styles.footerSection}>
+            <h3>اتصل بنا</h3>
+            <ul className={styles.contactList}>
+              <li><FaPhone /> {info[0].phone}</li>
+              <li><GiRotaryPhone /> {info[0].celPhone}</li>
+              <li><FaMapMarkerAlt /> {info[0].location}</li>
+            </ul>
+          </div>
+
+          <div className={styles.footerSection}>
+            <h3>تابعنا</h3>
+            <div className={styles.socialLinks}>
+              <a href="#"><FaFacebookF /></a>
+              <a href="#"><FaTwitter /></a>
+              <a href="#"><FaInstagram /></a>
+            </div>
+          </div>
+        </div>
+
+        <div className={styles.footerBottom}>
+          <p>&copy; {new Date().getFullYear()} المركز الجماهيري - ضواحي القدس. جميع الحقوق محفوظة.</p>
+          <p>تم تصميم الموقع بواسطة عمر مهلوس</p>
+        </div>
+      </footer>
+    </div>
+  );
+}
+
+export default HomePage;
