@@ -390,7 +390,7 @@ function HomePage() {
             </div>
             <div className={styles.aboutImage}></div>
           </div>
-          <button onClick={() => navigate('/error')} className={styles.learnMoreBtn}>من نحن</button>
+          <button onClick={() => navigate('/error')} className={styles.learnMoreBtn}>المزيد عنا</button>
         </section>
       </main>
 
