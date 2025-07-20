@@ -1,0 +1,318 @@
+/* ShpebaSec.module.css */
+
+/* تنسيقات عامة */
+.youthSectionContainer {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #ffffff;
+  color: #333;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+}
+
+/* الهيدر */
+.mainHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+  border-bottom: 1px solid #f0f0f0;
+  margin-bottom: 30px;
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  color: #4a6fa5;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.headerLeft:hover {
+  color: #ff6b6b;
+  transform: translateX(-5px);
+}
+
+.logoTitle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logoTitle img {
+  border-radius: 50%;
+  border: 2px solid #f0f0f0;
+  margin-bottom: 10px;
+}
+
+.logoTitle h1 {
+  margin: 0;
+  color: #4a6fa5;
+  font-size: 2rem;
+  text-align: center;
+}
+
+.headerSpacer {
+  width: 24px;
+}
+
+/* قسم المديرة */
+.managerIntro {
+  background: linear-gradient(to right, #f8f9fa, #ffffff);
+  padding: 25px;
+  border-radius: 10px;
+  margin-bottom: 30px;
+  border-left: 5px solid #ff6b6b;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+}
+
+.managerIntro h2 {
+  margin-top: 0;
+  color: #ff6b6b;
+  font-size: 1.8rem;
+}
+
+.managerIntro p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #555;
+}
+
+/* الوصف العام */
+.sectionIntro {
+  background-color: #f8f9fa;
+  padding: 25px;
+  border-radius: 10px;
+  margin-bottom: 30px;
+  text-align: center;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #555;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+}
+
+/* شبكة البطاقات */
+.cardsGridSmall {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
+  margin: 40px 0;
+}
+
+.smallCard {
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: 1px solid #f0f0f0;
+}
+
+.smallCard:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+  border-color: #4a6fa5;
+}
+
+.smallCard img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  display: block;
+}
+
+.smallCard h4 {
+  margin: 0;
+  padding: 20px;
+  color: #4a6fa5;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.2rem;
+  background-color: #f8f9fa;
+}
+
+.smallCard:hover h4 {
+  background-color: #4a6fa5;
+  color: white;
+}
+
+/* الاقتباس التحفيزي */
+.motivationalQuote {
+  text-align: center;
+  margin: 50px 0;
+  padding: 30px;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  position: relative;
+}
+
+.motivationalQuote::before {
+  content: '"';
+  position: absolute;
+  top: 10px;
+  left: 20px;
+  font-size: 5rem;
+  color: #4a6fa5;
+  opacity: 0.1;
+  font-family: serif;
+}
+
+.motivationalQuote blockquote {
+  margin: 0;
+  font-size: 1.5rem;
+  font-style: italic;
+  color: #4a6fa5;
+  line-height: 1.6;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* فوائد القسم */
+.youthBenefits {
+  background-color: white;
+  border-radius: 10px;
+  padding: 30px;
+  margin: 40px 0;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  border: 1px solid #f0f0f0;
+}
+
+.youthBenefits h2 {
+  text-align: center;
+  color: #ff6b6b;
+  margin-top: 0;
+  font-size: 1.8rem;
+}
+
+.youthBenefits ul {
+  list-style: none;
+  padding: 0;
+  max-width: 600px;
+  margin: 30px auto;
+}
+
+.youthBenefits li {
+  padding: 15px;
+  margin: 10px 0;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  transition: all 0.3s ease;
+}
+
+.youthBenefits li:hover {
+  background-color: #e9ecef;
+  transform: translateX(10px);
+}
+
+/* دعوة للانضمام */
+.callToAction {
+  text-align: center;
+  padding: 40px;
+  background: linear-gradient(to right, #4a6fa5, #4ecdc4);
+  color: white;
+  border-radius: 10px;
+  margin: 40px 0;
+}
+
+.callToAction h2 {
+  margin-top: 0;
+  font-size: 2.2rem;
+}
+
+.callToAction p {
+  font-size: 1.2rem;
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+/* الفوتر */
+.mainFooter {
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  padding: 30px;
+  margin-top: 40px;
+  text-align: center;
+  border-top: 1px solid #eee;
+}
+
+.footerContent h3 {
+  color: #4a6fa5;
+  margin-top: 0;
+  font-size: 1.8rem;
+}
+
+.footerContent p {
+  font-size: 1.1rem;
+  color: #555;
+  max-width: 600px;
+  margin: 15px auto;
+}
+
+.footerContact {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.footerContact li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 1.1rem;
+  color: #555;
+}
+
+.footerContact li:hover {
+  color: #ff6b6b;
+  cursor: pointer;
+}
+
+.footerBottom {
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+  color: #777;
+  font-size: 0.9rem;
+}
+
+/* تأثيرات تفاعلية */
+@media (max-width: 768px) {
+  .mainHeader {
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .headerLeft {
+    align-self: flex-start;
+  }
+  
+  .cardsGridSmall {
+    grid-template-columns: 1fr;
+  }
+  
+  .motivationalQuote blockquote {
+    font-size: 1.3rem;
+  }
+  
+  .callToAction {
+    padding: 25px 15px;
+  }
+  
+  .callToAction h2 {
+    font-size: 1.8rem;
+  }
+}

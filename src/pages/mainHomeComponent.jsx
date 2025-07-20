@@ -33,6 +33,12 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 
+import womanImg from "../assets/women.png"
+import thakafeImg from "../assets/thakafe.jpg"
+import oldmanImg from "../assets/oldman.jpg"
+import poorkidsImg from "../assets/nakie.jpg"
+import alkdmiImg from "../assets/alkdmi.jpg";
+
 function HomePage() {
   const navigate = useNavigate();
   const info = [
@@ -91,35 +97,14 @@ function HomePage() {
     image: plantimg
   }
 ];
- 
-  const managementData = [
-  {
-    id: 1,
-    name: "اسم",
-    p: "المدير",
-    image: 'https://www.gravatar.com/avatar/?d=mp'
-  },
-  {
-    id: 2,
-    name: "اسم",
-    p: "نائب المدير",
-    image: "https://www.gravatar.com/avatar/?d=mp"
-  },
-  {
-    id: 3,
-    name: "اسم ",
-    p: "السكرتيرا",
-    image: "https://www.gravatar.com/avatar/?d=mp"
-  }
-];
 
   const sections = [
-    { id: 1, name: "قسم الخدمة الاجتماعية", owner: "اسما ابو رمية", img: "https://www.gravatar.com/avatar/?d=mp", fact: "" },
+    { id: 1, name: "قسم الخدمة الاجتماعية", owner: "اسما ابو رمية", img: {alkdmiImg}, fact: "" },
     { id: 2, name: "قسم الشبيبة", owner: "هدى سلهب", img: "https://www.gravatar.com/avatar/?d=mp", fact: "مركز تعليمي", fact2: "دورات", fact3: "برامج تنشيطية", page: "/shpebaSec" },
-    { id: 3, name: "قسم النساء", owner: "نور", img: "https://www.gravatar.com/avatar/?d=mp", fact: "ورشات" },
-    { id: 4, name: "قسم الاحتياجات الخاصة", owner: "ايناس السلايمة", img: "https://www.gravatar.com/avatar/?d=mp", fact: "" },
-    { id: 5, name: "قسم الثقافة", owner: "ايناس ابو حمدة", img: "https://www.gravatar.com/avatar/?d=mp", fact: "نادي اطفال" },
-    { id: 6, name: "قسم المسنين", owner: "مروى حلواني", img: "https://www.gravatar.com/avatar/?d=mp", fact: "ورشات", fact2: "جولات", fact3: "رحل", fact4: "انشطة" },
+    { id: 3, name: "قسم النساء", owner: "نور", img: { womanImg }, fact: "ورشات" },
+    { id: 4, name: "قسم الاحتياجات الخاصة", owner: "ايناس السلايمة", img: { poorkidsImg }, fact: "" },
+    { id: 5, name: "قسم الثقافة", owner: "ايناس ابو حمدة", img: { thakafeImg }, fact: "نادي اطفال" },
+    { id: 6, name: "قسم المسنين", owner: "مروى حلواني", img: { oldmanImg }, fact: "ورشات", fact2: "جولات", fact3: "رحل", fact4: "انشطة" },
     { id: 7, name: "###########", owner: "حسان الحلواني", img: "https://www.gravatar.com/avatar/?d=mp", fact: "" },
   ];
 
@@ -334,7 +319,16 @@ function HomePage() {
             <div className={styles.sectionsGrid}>
               {sections.map((section) => {
                 const activities = [section.fact, section.fact2, section.fact3, section.fact4].filter(Boolean);
-                const hasImage = section.img && section.img.trim() !== '';
+
+                // Determine the correct image source
+                let imgSrc = "https://www.gravatar.com/avatar/?d=mp";
+                if (typeof section.img === "string") {
+                  imgSrc = section.img;
+                } else if (section.img && typeof section.img === "object") {
+                  // If it's an object, get the first value (the imported image)
+                  const values = Object.values(section.img);
+                  if (values.length > 0) imgSrc = values[0];
+                }
 
                 return (
                   <div
@@ -343,7 +337,7 @@ function HomePage() {
                   >
                     <div className={styles.logoContainer1}>
                       <img
-                        src={hasImage ? section.img : "https://www.gravatar.com/avatar/?d=mp"}
+                        src={imgSrc}
                         alt={section.name}
                         className={styles.sectionImage}
                       />

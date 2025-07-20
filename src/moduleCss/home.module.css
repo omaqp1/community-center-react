@@ -870,6 +870,10 @@
   margin-bottom: 10px;
   transition: background-color 0.3s ease;
   border: dashed 2px var(--bg-main1-light);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: auto;
 }
 
 .sectionButton:hover {
